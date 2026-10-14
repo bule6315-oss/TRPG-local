@@ -318,7 +318,7 @@ html, body {
       bottom: 0;
       right: 0;
       width: 100%;
-     /* height: calc(100dvh - 48px); /* ★キーボードの高さを引いた領域にピッタリ合わせる */
+      /*height: calc(100dvh - 48px);  /*キーボードの高さを引いた領域にピッタリ合わせる */
       transform: translateX(100%);
       border-left: none;
     }
@@ -2349,23 +2349,20 @@ function loadFromLocalStorage() {
     renderTokens();
   });
 
-// ★スマホのキーボード・予測変換バーのせり上がりにリアルタイム追従
-/*  if (window.visualViewport) {
-    const updateViewportHeight = () => {
-      const panel = document.getElementById('chatPanel');
-      if (window.innerWidth <= 768) {
-        // 予測変換バーを引いた「本当の表示可能高さ」にピッタリ合わせる
-        panel.style.height = `${window.visualViewport.height - 48}px`;
+// ★キーボード・予測変換バー出現時に、入力欄が隠れないよう自動スクロール
+const chatInputElem = document.getElementById('chatInput');
+if (chatInputElem) {
+  chatInputElem.addEventListener('focus', () => {
+    if (window.innerWidth <= 768) {
+      setTimeout(() => {
+        chatInputElem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         const box = document.getElementById('chatLogBox');
         if (box) box.scrollTop = box.scrollHeight;
-      } else {
-        panel.style.height = '';
-      }
-    };
-    window.visualViewport.addEventListener('resize', updateViewportHeight);
-    window.visualViewport.addEventListener('scroll', updateViewportHeight);
-  }
-*/
+      }, 300);
+    }
+  });
+}
+
   function downloadBlob(content, filename, mimeType) {
     const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
