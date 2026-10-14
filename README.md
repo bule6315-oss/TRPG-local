@@ -41,3 +41,7 @@ A lightweight, single-file HTML tool for tabletop RPG sessions, designed for loc
 
 This is a personal hobby project developed for private gaming sessions.
 Generative AI was used as a coding assistant for the design and implementation of this project.
+
+## 免責事項 / Disclaimer
+個人制作のツールのため動作保証や個別サポートはありません。セッションデータの管理は自己責任（こまめな部屋保存）でお願いします。
+Provided "as is" without warranty. Please ensure you export room backups regularly.
