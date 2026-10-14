@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
 <!-- ★アプリ偽装（PWA風・全画面表示用メタタグ） -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -445,7 +445,7 @@ html, body {
     position: relative;
     z-index: 10;
     flex-shrink: 0;
-    padding-bottom: 60px; /* ★予測変換バーを完全に回避するための底上げクッション */
+    padding-bottom: env(safe-area-inset-bottom, 8px);
   }
 
   /* チャットパレット */
