@@ -2349,19 +2349,23 @@ function loadFromLocalStorage() {
     renderTokens();
   });
 
-// ★キーボード・予測変換バー出現時に、入力欄が隠れないよう自動スクロール
-const chatInputElem = document.getElementById('chatInput');
-if (chatInputElem) {
-  chatInputElem.addEventListener('focus', () => {
-    if (window.innerWidth <= 768) {
-      setTimeout(() => {
-        chatInputElem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-        const box = document.getElementById('chatLogBox');
-        if (box) box.scrollTop = box.scrollHeight;
-      }, 300);
-    }
-  });
-}
+// ★キーボード・予測変換バー出現時に、入力欄全体を完全に画面内へ押し出す
+  const chatInputElem = document.getElementById('chatInput');
+  if (chatInputElem) {
+    chatInputElem.addEventListener('focus', () => {
+      if (window.innerWidth <= 768) {
+        setTimeout(() => {
+          // 入力欄の親枠（chat-input-area）の底を画面下端に合わせる
+          const inputArea = document.querySelector('.chat-input-area');
+          if (inputArea) {
+            inputArea.scrollIntoView({ block: 'end', behavior: 'smooth' });
+          }
+          const box = document.getElementById('chatLogBox');
+          if (box) box.scrollTop = box.scrollHeight;
+        }, 300);
+      }
+    });
+  }
 
   function downloadBlob(content, filename, mimeType) {
     const blob = new Blob([content], { type: mimeType });
