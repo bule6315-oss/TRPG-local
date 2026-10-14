@@ -2349,22 +2349,26 @@ function loadFromLocalStorage() {
     renderTokens();
   });
 
-// ★キーボード・予測変換バー出現時に、入力欄全体を完全に画面内へ押し出す
-  const chatInputElem = document.getElementById('chatInput');
-  if (chatInputElem) {
-    chatInputElem.addEventListener('focus', () => {
+// ★キーボード・予測変換バーの高さ分だけ、パネルの底（bottom）を吸着させる
+  if (window.visualViewport) {
+    const fitToKeyboard = () => {
       if (window.innerWidth <= 768) {
-        setTimeout(() => {
-          // 入力欄の親枠（chat-input-area）の底を画面下端に合わせる
-          const inputArea = document.querySelector('.chat-input-area');
-          if (inputArea) {
-            inputArea.scrollIntoView({ block: 'end', behavior: 'smooth' });
-          }
-          const box = document.getElementById('chatLogBox');
-          if (box) box.scrollTop = box.scrollHeight;
-        }, 300);
+        const panel = document.getElementById('chatPanel');
+        if (!panel) return;
+        
+        // 画面全体の高さから「実際に見えている高さ」を引いて、キーボードの厚みを割り出す
+        const keyboardHeight = window.innerHeight - (window.visualViewport.height + window.visualViewport.offsetTop);
+        
+        // キーボードの高さ分だけ底上げ（キーボードが閉じたら自動で 0px に戻る）
+        panel.style.bottom = `${Math.max(0, keyboardHeight)}px`;
+
+        const box = document.getElementById('chatLogBox');
+        if (box) box.scrollTop = box.scrollHeight;
       }
-    });
+    };
+
+    window.visualViewport.addEventListener('resize', fitToKeyboard);
+    window.visualViewport.addEventListener('scroll', fitToKeyboard);
   }
 
   function downloadBlob(content, filename, mimeType) {
