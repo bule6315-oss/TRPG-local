@@ -445,7 +445,7 @@ html, body {
     position: relative;
     z-index: 10;
     flex-shrink: 0;
-    padding-bottom: env(safe-area-inset-bottom, 16px);
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
   }
 
 /* 入力中（キーボードが出ている時）だけ、予測変換バーの高さ分（45px）上に浮き上がらせる */
