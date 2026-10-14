@@ -2350,7 +2350,7 @@ function loadFromLocalStorage() {
   });
 
 // ★スマホのキーボード・予測変換バーのせり上がりにリアルタイム追従
-  if (window.visualViewport) {
+/*  if (window.visualViewport) {
     const updateViewportHeight = () => {
       const panel = document.getElementById('chatPanel');
       if (window.innerWidth <= 768) {
@@ -2365,7 +2365,7 @@ function loadFromLocalStorage() {
     window.visualViewport.addEventListener('resize', updateViewportHeight);
     window.visualViewport.addEventListener('scroll', updateViewportHeight);
   }
-
+*/
   function downloadBlob(content, filename, mimeType) {
     const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
